@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "122854171409",
+    "firebase_url": "https://fir-bingo-50b08.firebaseio.com",
+    "project_id": "fir-bingo-50b08",
+    "storage_bucket": "fir-bingo-50b08.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122854171409:android:5a811cf5c67d4f35",
+        "android_client_info": {
+          "package_name": "undev.bg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122854171409-1lrs3tpojgi3hses00efmqclj3frfdeb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "undev.bg",
+            "certificate_hash": "E67EF2F2E212970C6D15614DE38DBEAC59DD80FA"
+          }
+        },
+        {
+          "client_id": "122854171409-kqdthobeu7cn1f8atknqgmaf4qs2mbae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRalRykr3by7ClOIG5nuRycF7TqLgIeSs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122854171409-kqdthobeu7cn1f8atknqgmaf4qs2mbae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
