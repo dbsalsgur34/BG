@@ -17,7 +17,7 @@ import java.util.Calendar;
 import java.util.Random;
 
 
-public class GameFragment extends Fragment {
+public class GameFragment extends BaseFragment {
 
     private static int turn;
 
@@ -31,7 +31,7 @@ public class GameFragment extends Fragment {
     private Button[] buttons;
     private int[] boardNumber;
     private ArrayList<Integer> bingoOrder;
-
+    private int[] bingoLines;
 
     private  Random random;
 
@@ -39,7 +39,7 @@ public class GameFragment extends Fragment {
     private Button next;
     private Button start;
     private Button bingo;
-    private Button metch;
+    private Button rank;
     private TextView turnText;
     private AlertDialog.Builder scoreBuilder;
 
@@ -107,6 +107,13 @@ public class GameFragment extends Fragment {
             }
         });
         //////////////////////////////////////////////////////////////////
+        rank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, RankFragment.newInstance()).commit();
+            }
+        });
+        //////////////////////////////////////////////////////////////////
         setTurnText();
         return view;
     }
@@ -126,12 +133,15 @@ public class GameFragment extends Fragment {
         this.displayWidth = getActivity().getResources().getDisplayMetrics().widthPixels;
         this.boardNumber = new int[boardColumn*boardRow];
         buttons = new Button[boardColumn*boardRow];
+        bingoLines = new int[boardColumn*boardRow+2];
 
         gridLayout = (GridLayout) view.findViewById(R.id.bingo_board_layout);
         next = (Button) view.findViewById(R.id.next_bingo);
         start = (Button) view.findViewById(R.id.start);
         turnText = (TextView) view.findViewById(R.id.turn_text);
         bingo = (Button) view.findViewById(R.id.bingo);
+        rank = (Button) view.findViewById(R.id.rank);
+
 
     }
 
@@ -143,10 +153,7 @@ public class GameFragment extends Fragment {
             buttons[index].setText(String.valueOf(boardNumber[index]));
             buttons[index].setBackgroundColor(Color.GRAY);
             buttons[index].invalidate();
-
         }
-
-
     }
     private int randomInt(){
         return random.nextInt(MaxNumber);
@@ -177,21 +184,29 @@ public class GameFragment extends Fragment {
             if(boardNumber[index] == number){
                 buttons[index].setBackgroundColor(Color.CYAN);
                 buttons[index].invalidate();
+                addToBingoLine(index);
             }
-
         }
-
-        checkBingo();
     }
     private void setTurnText(){
         turnText.setText(String.valueOf(turn));
     }
     private int checkBingo(){
-        return 0;
+        int bingo =0;
+        for(int index=0; index < bingoLines.length; index++){
+            if(bingoLines[index] == boardColumn){
+                bingo++;
+            }
+        }
+        return bingo;
+    }
+    private void initBingoLines(){
+        bingoLines = new int[boardColumn*boardRow+2];
     }
     private void endGame(){
         start.setEnabled(true);
         next.setEnabled(false);
+        initBingoLines();
         //scoreBuilder.create().show();
     }
     private void startGame(){
@@ -206,7 +221,21 @@ public class GameFragment extends Fragment {
         checkBoardNumber();
         turn++;
         bingo.setText("BINGO["+String.valueOf(checkBingo())+"]");
+        if(checkBingo() ==12)
+            endGame();
+    }
 
+    private void addToBingoLine(int index){
+        int column = index%boardColumn;
+        int row = index/boardRow;
 
+        bingoLines[column]++;
+        bingoLines[boardColumn+row]++;
+        if(column == row){
+            bingoLines[boardColumn*boardRow]++;
+        }
+        if(column+row == 4){
+            bingoLines[boardColumn*boardRow+1]++;
+        }
     }
 }
