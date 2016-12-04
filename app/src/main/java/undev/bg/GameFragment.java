@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
+
+import undev.bg.rank.RankFragment;
 
 
 public class GameFragment extends BaseFragment {
@@ -103,7 +104,6 @@ public class GameFragment extends BaseFragment {
                 if(checkBingo() > 0){
                     endGame();
                 }
-                endGame();
             }
         });
         //////////////////////////////////////////////////////////////////
@@ -213,6 +213,7 @@ public class GameFragment extends BaseFragment {
         setBoardNumber();
         setTurnText();
         this.bingoOrder = new ArrayList<>();
+        rank.setEnabled(false);
         bingo.setEnabled(true);
     }
 

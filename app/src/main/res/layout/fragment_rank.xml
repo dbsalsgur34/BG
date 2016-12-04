@@ -2,12 +2,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="undev.bg.RankFragment">
+    tools:context="undev.bg.rank.RankFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:text="MY RANK"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_rank_button" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/user_rank" />
+
+            <Button
+                android:text="Daily Top 10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/day_rank_button" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/day_top_rank_list" />
+
+            <Button
+                android:text="Weekly Top 10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/week_rank_button" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/week_top_rank_list" />
+
+            <Button
+                android:text="Monthly Top 10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/month_rank_button" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/month_top_rank_list" />
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
