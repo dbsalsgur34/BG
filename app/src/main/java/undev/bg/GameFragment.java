@@ -206,6 +206,7 @@ public class GameFragment extends BaseFragment {
     private void endGame(){
         start.setEnabled(true);
         next.setEnabled(false);
+        rank.setEnabled(true);
         initBingoLines();
         //scoreBuilder.create().show();
     }

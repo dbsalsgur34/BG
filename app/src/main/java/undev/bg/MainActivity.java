@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.fragmentStack = new ArrayList<>();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, GameFragment.newInstance()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, LoginFragment.newInstance()).commit();
     }
 
     @Override
