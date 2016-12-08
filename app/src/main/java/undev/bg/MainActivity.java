@@ -3,20 +3,30 @@ package undev.bg;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.util.ArrayList;
+
 
 
 public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<BaseFragment> fragmentStack;
+    public static FirebaseIO firebaseIO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.fragmentStack = new ArrayList<>();
+        firebaseIO = new FirebaseIO(FirebaseDatabase.getInstance(), FirebaseAuth.getInstance(), FirebaseStorage.getInstance());
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, LoginFragment.newInstance()).commit();
+        if(firebaseIO.isSignIn())
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, GameFragment.newInstance()).commit();
+        else
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, LoginFragment.newInstance()).commit();
     }
 
     @Override

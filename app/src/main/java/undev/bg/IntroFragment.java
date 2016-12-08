@@ -87,6 +87,7 @@ public class IntroFragment extends BaseFragment {
                FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
+
                     Toast.makeText(getContext(), "firebase sign in", Toast.LENGTH_LONG).show();
                 } else {
                     // User is signed out
