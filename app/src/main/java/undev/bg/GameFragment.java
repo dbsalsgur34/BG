@@ -22,6 +22,7 @@ public class GameFragment extends BaseFragment {
 
     private static int turn;
 
+    private FirebaseIO firebaseIO;
     private int boardColumn = 5;
     private int boardRow = 5;
     private int displayWidth;
@@ -51,6 +52,7 @@ public class GameFragment extends BaseFragment {
 
     public static GameFragment newInstance() {
         GameFragment fragment = new GameFragment();
+        fragment.firebaseIO = ((MainActivity)fragment.getActivity()).firebaseIO;
         return fragment;
     }
 
@@ -206,6 +208,7 @@ public class GameFragment extends BaseFragment {
     private void endGame(){
         start.setEnabled(true);
         next.setEnabled(false);
+        rank.setEnabled(true);
         initBingoLines();
         //scoreBuilder.create().show();
     }

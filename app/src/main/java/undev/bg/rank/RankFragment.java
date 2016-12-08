@@ -6,14 +6,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import undev.bg.BaseFragment;
+import undev.bg.FirebaseIO;
+import undev.bg.LoginFragment;
 import undev.bg.MainActivity;
 import undev.bg.R;
 
@@ -23,8 +29,7 @@ import undev.bg.R;
  */
 public class RankFragment extends BaseFragment {
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    private FirebaseIO firebaseIO;
 
     private RecyclerView myTopRank;
     private RecyclerView dayTopRank;
@@ -39,6 +44,8 @@ public class RankFragment extends BaseFragment {
     private Content[] contents;
     private RecyclerView[] recyclerViews;
 
+
+    Button signOut;
     public RankFragment() {
         // Required empty public constructor
     }
@@ -47,6 +54,7 @@ public class RankFragment extends BaseFragment {
     public static RankFragment newInstance() {
         RankFragment fragment = new RankFragment();
         ((MainActivity)fragment.getActivity()).fragmentStack.add(fragment);
+        fragment.firebaseIO = ((MainActivity)fragment.getActivity()).firebaseIO;
         return fragment;
     }
 
@@ -83,10 +91,25 @@ public class RankFragment extends BaseFragment {
             recyclerViews[index].setAdapter(new RankRecyclerViewAdapter(contents[index].ITEMS));
         }
 
+        signOut = (Button) view.findViewById(R.id.rank_sign_out);
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut();
+
+            }
+        });
 
         return view;
     }
 
+
+    public boolean signOut(){
+        firebaseIO.getFirebaseAuth().signOut();
+        Toast.makeText(getContext(), "sign out", Toast.LENGTH_LONG).show();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, LoginFragment.newInstance()).commit();
+        return true;
+    }
 
     private void getRankList(){
 

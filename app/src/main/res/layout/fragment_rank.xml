@@ -58,6 +58,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/month_top_rank_list" />
+
+            <Button
+                android:text="SIGN OUT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rank_sign_out" />
         </LinearLayout>
     </ScrollView>
 
