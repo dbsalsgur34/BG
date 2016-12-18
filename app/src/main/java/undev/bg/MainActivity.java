@@ -9,6 +9,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
+import undev.bg.wait.WaitFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
         this.fragmentStack = new ArrayList<>();
         firebaseIO = new FirebaseIO(FirebaseDatabase.getInstance(), FirebaseAuth.getInstance(), FirebaseStorage.getInstance());
 
-        if(firebaseIO.isSignIn())
-            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, GameFragment.newInstance()).commit();
+        if(firebaseIO.isSignIn()){
+            firebaseIO.setUser(firebaseIO.getCurrentUser());
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, WaitFragment.newInstance()).commit();
+        }
         else
             getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, LoginFragment.newInstance()).commit();
     }
@@ -44,4 +47,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+    }
+
 }

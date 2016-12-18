@@ -105,7 +105,9 @@ public class RankFragment extends BaseFragment {
 
 
     public boolean signOut(){
+        firebaseIO.userOffLine();
         firebaseIO.getFirebaseAuth().signOut();
+
         Toast.makeText(getContext(), "sign out", Toast.LENGTH_LONG).show();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, LoginFragment.newInstance()).commit();
         return true;

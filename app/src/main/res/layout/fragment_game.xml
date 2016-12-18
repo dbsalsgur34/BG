@@ -13,10 +13,10 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:text="RANK"
+            android:text="OUT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rank"
+            android:id="@+id/button_out"
             android:layout_weight="1" />
 
         <TextView
@@ -29,10 +29,10 @@
             android:textAlignment="center" />
 
         <Button
-            android:text="BINGO!![0]"
+            android:text="READY"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/bingo"
+            android:id="@+id/button_ready"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -49,15 +49,9 @@
         </GridLayout>
 
         <Button
-            android:text="start"
+            android:text="BINGO!![0]"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/start" />
-
-        <Button
-            android:text="NEXT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/next_bingo" />
+            android:id="@+id/button_bingo" />
     </LinearLayout>
 </LinearLayout>

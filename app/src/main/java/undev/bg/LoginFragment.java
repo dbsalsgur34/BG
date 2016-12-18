@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +20,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.ArrayList;
+
+import undev.bg.wait.WaitFragment;
 
 
 /**
@@ -37,6 +37,7 @@ public class LoginFragment extends BaseFragment {
     private AlertDialog signUpDialog;
     private AlertDialog.Builder builder;
 
+    private boolean isNewUser = false;
 
     private FirebaseIO firebaseIO;
 
@@ -113,7 +114,7 @@ public class LoginFragment extends BaseFragment {
     }
 
     public void signUp(String email, String password){
-
+        this.isNewUser = true;
         firebaseIO.getFirebaseAuth().createUserWithEmailAndPassword(email, password).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -125,7 +126,6 @@ public class LoginFragment extends BaseFragment {
                 if(task.isSuccessful()){
                     Toast.makeText(getContext(), "sign up success", Toast.LENGTH_SHORT);
                     signIn(textviewEmail.getText().toString(), textviewPassword.getText().toString());
-                    updateUserName(nameText.getText().toString());
                 }
                 else
                     Toast.makeText(getActivity(), "sign up fail", Toast.LENGTH_SHORT).show();
@@ -140,7 +140,12 @@ public class LoginFragment extends BaseFragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     firebaseIO.setUser(firebaseIO.getFirebaseAuth().getCurrentUser());
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, GameFragment.newInstance()).commit();
+                    if(isNewUser){
+                        firebaseIO.initUserDatabase();
+                        updateUserName(nameText.getText().toString());
+                    }
+                    firebaseIO.userOnLine();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, WaitFragment.newInstance()).commit();
                     Toast.makeText(getActivity(), "sign in", Toast.LENGTH_SHORT).show();
                 }
                 else

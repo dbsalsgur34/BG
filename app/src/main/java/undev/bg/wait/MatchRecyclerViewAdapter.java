@@ -1,29 +1,30 @@
-package undev.bg.rank;
+package undev.bg.wait;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
-
 
 import java.util.List;
 
 import undev.bg.R;
+import undev.bg.rank.Rank;
 
-public class RankRecyclerViewAdapter extends RecyclerView.Adapter<RankRecyclerViewAdapter.ViewHolder> {
+public class MatchRecyclerViewAdapter extends RecyclerView.Adapter<MatchRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Rank> mValues;
+    private final List<Match> mValues;
 
 
-    public RankRecyclerViewAdapter(List<Rank> items) {
+    public MatchRecyclerViewAdapter(List<Match> items) {
         mValues = items;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_rank, parent, false);
+                .inflate(R.layout.layout_match, parent, false);
 
         return new ViewHolder(view);
 
@@ -42,20 +43,13 @@ public class RankRecyclerViewAdapter extends RecyclerView.Adapter<RankRecyclerVi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public Rank mItem;
-        public int rank;
+        public Match mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-
-            TextView rank = (TextView) mView.findViewById(R.id.rank_num);
-            TextView userName = (TextView) mView.findViewById(R.id.rank_username);
-            TextView score = (TextView) mView.findViewById(R.id.rank_score);
-
-            rank.setText(this.rank);
-            userName.setText(mItem.userName);
-            score.setText(mItem.score);
+            TextView title = (TextView) view.findViewById(R.id.textView_match_title);
+            title.setText(view.toString());
         }
 
         @Override

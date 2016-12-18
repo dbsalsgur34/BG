@@ -1,6 +1,5 @@
 package undev.bg;
 
-import com.google.android.gms.auth.api.Auth;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +26,8 @@ public class FirebaseIO {
         this.databaseReference = firebaseDatabase.getReference();
         this.firebaseStorage = firebaseStorage;
         this.storageReference = firebaseStorage.getReference();
+
+        this.databaseReference = firebaseDatabase.getReference();
     }
 
     public boolean isSignIn(){
@@ -41,6 +42,7 @@ public class FirebaseIO {
     }
 
 
+    public DatabaseReference getDatabaseReference() { return databaseReference; }
 
     public FirebaseDatabase getFirebaseDatabase() {
         return firebaseDatabase;
@@ -67,17 +69,19 @@ public class FirebaseIO {
     }
 
     public void initUserDatabase(){
-        databaseReference = firebaseDatabase.getReference("user");
-        databaseReference.child(user.getUid()).child("score").setValue(0);
-        databaseReference.child(user.getUid()).child("is online").setValue(true);
+        databaseReference.child("user").child(user.getUid()).child("score").setValue(0);
+        databaseReference.child("user").child(user.getUid()).child("is online").setValue(false);
     }
     public void userOffLine(){
-        databaseReference.child(user.getUid()).child("is online").setValue(false);
+        databaseReference.child("user").child(user.getUid()).child("is online").setValue(false);
     }
     public void userOnLine(){
-        databaseReference.child(user.getUid()).child("is online").setValue(true);
+        databaseReference.child("user").child(user.getUid()).child("is online").setValue(true);
     }
     public void userSetScore(int score){
-        databaseReference.child(user.getUid()).child("score").setValue(score);
+        databaseReference.child("user").child(user.getUid()).child("score").setValue(score);
     }
+
+
+
 }
